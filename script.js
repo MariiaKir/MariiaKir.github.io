@@ -57,9 +57,46 @@ document.addEventListener('click', () => {
     }
 }, { once: true });
 
-const totalCells = 25;
+// =============================================
+// ФУНКЦИЯ АВТОПОДГОНКИ ТЕКСТА
+// =============================================
 
-// Бинго - просто отображаем элементы
+function fitTextToCell(cell, text) {
+    // Устанавливаем текст
+    cell.textContent = text;
+    
+    // Получаем размеры ячейки
+    const cellWidth = cell.clientWidth;
+    const cellHeight = cell.clientHeight;
+    const padding = 10; // padding с двух сторон
+    
+    // Доступная площадь для текста
+    const availableWidth = cellWidth - padding;
+    const availableHeight = cellHeight - padding;
+    
+    // Начинаем с максимального размера
+    let fontSize = 20;
+    cell.style.fontSize = fontSize + 'px';
+    
+    // Уменьшаем шрифт пока текст не поместится
+    while (fontSize > 8) {
+        const textWidth = cell.scrollWidth;
+        const textHeight = cell.scrollHeight;
+        
+        if (textWidth <= availableWidth && textHeight <= availableHeight) {
+            break; // Текст поместился
+        }
+        
+        // Уменьшаем шрифт
+        fontSize -= 1;
+        cell.style.fontSize = fontSize + 'px';
+    }
+}
+
+// =============================================
+// СОЗДАНИЕ БИНГО-СЕТКИ
+// =============================================
+
 const bingoGrid = document.getElementById('bingoGrid');
 
 // Заполняем недостающие элементы
@@ -68,10 +105,44 @@ while (itemsToShow.length < 25) {
     itemsToShow.push(`Ячейка ${itemsToShow.length + 1}`);
 }
 
-// Создаем ячейки с текстом
+// Создаем ячейки
 for (let i = 0; i < 25; i++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
-    cell.textContent = itemsToShow[i];
+    cell.dataset.index = i;
+    
+    // Начальный текст - вопросик
+    cell.textContent = '?';
+    
+    // При клике показываем текст с автоподгонкой
+    cell.addEventListener('click', () => {
+        if (!cell.classList.contains('revealed')) {
+            fitTextToCell(cell, itemsToShow[i]);
+            cell.classList.add('revealed');
+        }
+    });
+    
     bingoGrid.appendChild(cell);
 }
+
+// =============================================
+// ПОДГОНКА ПРИ ИЗМЕНЕНИИ РАЗМЕРА ОКНА
+// =============================================
+
+function adjustAllCells() {
+    const cells = document.querySelectorAll('.bingo-cell.revealed');
+    cells.forEach(cell => {
+        const index = parseInt(cell.dataset.index);
+        fitTextToCell(cell, itemsToShow[index]);
+    });
+}
+
+// Пересчитываем при изменении размера окна
+let resizeTimeout;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(adjustAllCells, 250);
+});
+
+// Инициализация при полной загрузке страницы
+window.addEventListener('load', adjustAllCells);
