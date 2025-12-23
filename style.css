@@ -71,7 +71,7 @@ body {
 /* HOVER для ПК (только когда есть hover) */
 @media (hover: hover) and (pointer: fine) {
     .bingo-cell:hover {
-        transform: scale(1.05);
+        transform: scale(2.05);
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         background: #45a049; /* немного темнее */
     }
