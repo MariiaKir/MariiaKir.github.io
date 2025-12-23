@@ -105,22 +105,16 @@ while (itemsToShow.length < 25) {
     itemsToShow.push(`Ячейка ${itemsToShow.length + 1}`);
 }
 
-// Создаем ячейки
+// Создаем ячейки и сразу показываем текст
 for (let i = 0; i < 25; i++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
-    cell.dataset.index = i;
     
-    // Начальный текст - вопросик
-    cell.textContent = '?';
+    // Сразу показываем текст из массива
+    cell.textContent = itemsToShow[i];
     
-    // При клике показываем текст с автоподгонкой
-    cell.addEventListener('click', () => {
-        if (!cell.classList.contains('revealed')) {
-            fitTextToCell(cell, itemsToShow[i]);
-            cell.classList.add('revealed');
-        }
-    });
+    // Подгоняем размер текста
+    fitTextToCell(cell, itemsToShow[i]);
     
     bingoGrid.appendChild(cell);
 }
@@ -130,10 +124,11 @@ for (let i = 0; i < 25; i++) {
 // =============================================
 
 function adjustAllCells() {
-    const cells = document.querySelectorAll('.bingo-cell.revealed');
-    cells.forEach(cell => {
-        const index = parseInt(cell.dataset.index);
-        fitTextToCell(cell, itemsToShow[index]);
+    const cells = document.querySelectorAll('.bingo-cell');
+    cells.forEach((cell, index) => {
+        if (index < itemsToShow.length) {
+            fitTextToCell(cell, itemsToShow[index]);
+        }
     });
 }
 
