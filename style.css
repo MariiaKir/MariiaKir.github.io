@@ -37,32 +37,29 @@ body {
     margin: 20px 0;
 }
 
-bingo-cell {
-    width: 150px;       /* Фиксированная ширина */
-    height: 150px;      /* Фиксированная высота */
-    background: #4CAF50;
-    border: 2px solid #388E3C;
+
+.bingo-cell {
+    aspect-ratio: 1;                     /* квадратные ячейки */
+    min-height: 0;                       /* важно для aspect-ratio */
+    min-width: 0;                        /* важно для переноса текста */
+    background: #4CAF50;                 /* цвет как в первоначальной */
+    border: 2px solid #388E3C;           /* рамка как в первоначальной */
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 14px;
+    font-size: 14px;                     /* базовый размер шрифта */
     text-align: center;
     border-radius: 5px;
     color: white;
-    padding: 10px;      /* Отступ внутри ячейки */
-    overflow: hidden;   /* Скрываем то, что не влезло */
-    word-wrap: break-word; /* Перенос длинных слов */
-    overflow-wrap: break-word; /* Перенос длинных слов */
-    word-break: break-word; /* Перенос слов при необходимости */
-}
-
-.bingo-cell.revealed {
-    background: #4CAF50;
-    color: white;
-    border-color: #388E3C;
-}
-
-.bingo-cell.locked {
-    background: #ff9800;
-    color: white;
+    padding: 5px;                        /* уменьшил padding для текста */
+    
+    /* Для переноса текста: */
+    overflow: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    
+    /* Чтобы текст уменьшался если не помещается: */
+    line-height: 1.2;
+    font-size: clamp(10px, 2.5vw, 14px); /* адаптивный размер шрифта */
 }
