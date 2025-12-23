@@ -41,43 +41,48 @@ body {
     aspect-ratio: 1;
     min-height: 0;
     min-width: 0;
-    background: #eee;
-    border: 2px solid #ccc;
+    background: #4CAF50;
+    border: 2px solid #388E3C;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
-    color: black;
-    padding: 5px;
-    cursor: pointer;
-    transition: all 0.3s;
+    color: white;
+    padding: 8px;
     
-    /* Для переноса текста: */
-    overflow: hidden;
+    /* ОБЯЗАТЕЛЬНО ДЛЯ ПЕРЕНОСА БЕЗ СКРОЛЛА: */
+    overflow: hidden !important; /* Скрываем всё что не влезло */
     word-wrap: break-word;
     overflow-wrap: break-word;
     word-break: break-word;
+    white-space: normal;
     line-height: 1.2;
     
-    /* Автоподгонка шрифта будет через JS */
-    font-size: 14px; /* начальный размер */
+    /* Фиксированные размеры шрифта */
+    font-size: 16px; /* для компьютера */
 }
 
-/* При наведении */
-.bingo-cell:hover {
-    transform: scale(2.00); /* небольшое увеличение */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-/* Адаптивность для телефонов */
-@media (max-width: 600px) {
-    .bingo-grid {
-        gap: 5px;
+/* Адаптивность */
+@media (max-width: 1024px) {
+    .bingo-cell {
+        font-size: 14px;
+        padding: 6px;
     }
-    
-    .bingo-container {
-        padding: 10px;
-        margin-top: 60px;
+}
+
+@media (max-width: 768px) {
+    .bingo-cell {
+        font-size: 12px;
+        padding: 5px;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .bingo-cell {
+        font-size: 10px;
+        padding: 4px;
+        gap: 5px;
     }
 }
