@@ -42,7 +42,7 @@ body {
     min-height: 0;
     min-width: 0;
     background: #eee;
-    border: 2px solid #388E3C;
+    border: 2px solid #333;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,7 +79,7 @@ body {
 
 /* ACTIVE эффект (для нажатия на ПК и тапов на мобильных) */
 .bingo-cell:active {
-    transform: scale(0.95);
+    transform: scale(2.00);
     background: #eee; /* еще темнее */
     transition: transform 0.1s ease; /* быстрая анимация */
 }
