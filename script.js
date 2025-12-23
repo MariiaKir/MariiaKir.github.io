@@ -7,9 +7,11 @@ const bingoItems = [
     "?", 
     "?",
     "?",
+    "?",
     
     "?",
     "Всем", 
+    "?",
     "?",
     "?",
     
@@ -17,14 +19,16 @@ const bingoItems = [
     "?", 
     "Привет",
     "?",
-    
-    "?",
-    "?", 
-    "?",
     "?",
     
     "?",
     "?", 
+    "?",
+    "?",
+    
+    "?",
+    "?", 
+    "?",
     "?",
     "?"
 ];
@@ -52,7 +56,7 @@ document.addEventListener('click', () => {
     }
 }, { once: true });
 
-const totalCells = 16;
+const totalCells = 25;
 
 // Бинго - просто отображаем элементы
 const bingoGrid = document.getElementById('bingoGrid');
@@ -64,7 +68,7 @@ while (itemsToShow.length < 25) {
 }
 
 // Создаем ячейки с текстом
-for (let i = 0; i < 16; i++) {
+for (let i = 0; i < 25; i++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
     cell.textContent = itemsToShow[i];
