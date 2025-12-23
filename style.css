@@ -41,14 +41,14 @@ body {
     aspect-ratio: 1;
     min-height: 0;
     min-width: 0;
-    background: #4CAF50;
+    background: #eee;
     border: 2px solid #388E3C;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     border-radius: 5px;
-    color: white;
+    color: black;
     padding: 8px;
     
     /* ОБЯЗАТЕЛЬНО ДЛЯ ПЕРЕНОСА БЕЗ СКРОЛЛА: */
@@ -73,14 +73,14 @@ body {
     .bingo-cell:hover {
         transform: scale(2.05);
         box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        background: #45a049; /* немного темнее */
+        background: #eee; /* немного темнее */
     }
 }
 
 /* ACTIVE эффект (для нажатия на ПК и тапов на мобильных) */
 .bingo-cell:active {
     transform: scale(0.95);
-    background: #3d8b40; /* еще темнее */
+    background: #eee; /* еще темнее */
     transition: transform 0.1s ease; /* быстрая анимация */
 }
 
