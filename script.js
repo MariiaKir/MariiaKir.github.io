@@ -64,7 +64,7 @@ while (itemsToShow.length < 25) {
 }
 
 // Создаем ячейки с текстом
-for (let i = 0; i < 25; i++) {
+for (let i = 0; i < 16; i++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
     cell.textContent = itemsToShow[i];
