@@ -58,9 +58,30 @@ body {
     word-break: break-word;
     white-space: normal;
     line-height: 1.2;
+
+    /* Для интерактивности: */
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none; /* чтобы не выделялся текст при тапе */
     
     /* Фиксированные размеры шрифта */
     font-size: 16px; /* для компьютера */
+}
+
+/* HOVER для ПК (только когда есть hover) */
+@media (hover: hover) and (pointer: fine) {
+    .bingo-cell:hover {
+        transform: scale(1.05);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        background: #45a049; /* немного темнее */
+    }
+}
+
+/* ACTIVE эффект (для нажатия на ПК и тапов на мобильных) */
+.bingo-cell:active {
+    transform: scale(0.95);
+    background: #3d8b40; /* еще темнее */
+    transition: transform 0.1s ease; /* быстрая анимация */
 }
 
 /* Адаптивность */
