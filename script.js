@@ -57,39 +57,56 @@ document.addEventListener('click', () => {
     }
 }, { once: true });
 
-// =============================================
-// ФУНКЦИЯ АВТОПОДГОНКИ ТЕКСТА
-// =============================================
 
 function fitTextToCell(cell, text) {
-    // Устанавливаем текст
+    // Сохраняем оригинальный текст
     cell.textContent = text;
+    
+    // Сбрасываем стили
+    cell.style.fontSize = '';
+    cell.style.lineHeight = '';
     
     // Получаем размеры ячейки
     const cellWidth = cell.clientWidth;
     const cellHeight = cell.clientHeight;
-    const padding = 10; // padding с двух сторон
+    const padding = 10;
     
-    // Доступная площадь для текста
-    const availableWidth = cellWidth - padding;
-    const availableHeight = cellHeight - padding;
+    // Определяем базовый размер шрифта в зависимости от экрана
+    const isMobile = window.innerWidth <= 768;
+    let baseFontSize = isMobile ? 12 : 16; // Больше на компьютере
     
-    // Начинаем с максимального размера
-    let fontSize = 20;
-    cell.style.fontSize = fontSize + 'px';
+    // Устанавливаем начальный размер
+    cell.style.fontSize = baseFontSize + 'px';
+    cell.style.lineHeight = '1.2';
     
-    // Уменьшаем шрифт пока текст не поместится
-    while (fontSize > 8) {
+    // Проверяем, помещается ли текст
+    let fontSize = baseFontSize;
+    let fits = false;
+    
+    // Пробуем уменьшать только если не помещается
+    while (fontSize > 8 && !fits) {
         const textWidth = cell.scrollWidth;
         const textHeight = cell.scrollHeight;
         
-        if (textWidth <= availableWidth && textHeight <= availableHeight) {
-            break; // Текст поместился
+        // Проверяем с запасом
+        const widthFits = textWidth <= (cellWidth - padding);
+        const heightFits = textHeight <= (cellHeight - padding);
+        
+        if (widthFits && heightFits) {
+            fits = true;
+            break;
         }
         
-        // Уменьшаем шрифт
-        fontSize -= 1;
+        // Уменьшаем шрифт небольшими шагами
+        fontSize -= 0.5;
         cell.style.fontSize = fontSize + 'px';
+    }
+    
+    // Если текст слишком длинный, разрешаем горизонтальный скролл
+    if (!fits && fontSize <= 8) {
+        cell.style.overflowX = 'auto';
+        cell.style.whiteSpace = 'nowrap';
+        cell.style.fontSize = '12px';
     }
 }
 
@@ -105,16 +122,13 @@ while (itemsToShow.length < 25) {
     itemsToShow.push(`Ячейка ${itemsToShow.length + 1}`);
 }
 
-// Создаем ячейки и сразу показываем текст
+// Создаем ячейки
 for (let i = 0; i < 25; i++) {
     const cell = document.createElement('div');
     cell.className = 'bingo-cell';
     
-    // Сразу показываем текст из массива
+    // Сразу показываем текст
     cell.textContent = itemsToShow[i];
-    
-    // Подгоняем размер текста
-    fitTextToCell(cell, itemsToShow[i]);
     
     bingoGrid.appendChild(cell);
 }
@@ -127,17 +141,25 @@ function adjustAllCells() {
     const cells = document.querySelectorAll('.bingo-cell');
     cells.forEach((cell, index) => {
         if (index < itemsToShow.length) {
-            fitTextToCell(cell, itemsToShow[index]);
+            // Даем время на перерисовку
+            setTimeout(() => {
+                fitTextToCell(cell, itemsToShow[index]);
+            }, 50);
         }
     });
 }
+
+// Первая настройка после загрузки
+window.addEventListener('load', () => {
+    setTimeout(adjustAllCells, 100);
+});
 
 // Пересчитываем при изменении размера окна
 let resizeTimeout;
 window.addEventListener('resize', () => {
     clearTimeout(resizeTimeout);
-    resizeTimeout = setTimeout(adjustAllCells, 250);
+    resizeTimeout = setTimeout(adjustAllCells, 300);
 });
 
-// Инициализация при полной загрузке страницы
-window.addEventListener('load', adjustAllCells);
+// Также подгоняем когда DOM полностью готов
+document.addEventListener('DOMContentLoaded', adjustAllCells); 
