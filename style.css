@@ -15,7 +15,7 @@ body {
 #muteBtn {
     padding: 10px 15px;
     background: #ccc;
-    color: white;
+    color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -66,56 +66,62 @@ body {
     
     /* Фиксированные размеры шрифта */
     font-size: 16px; /* для компьютера */
+
+     /* Нормальный размер по умолчанию */
+    transform: scale(1);
+    z-index: 1;
 }
 
-/* Открытая ячейка */
-.bingo-cell.opened {
-    background: #eee; /* ЗЕЛЕНЫЙ */
-    color: black; /* БЕЛЫЙ текст */
-    border-color: #ccc;
-}
-
-/* HOVER только для неоткрытых на ПК */
-@media (hover: hover) and (pointer: fine) {
-    .bingo-cell:not(.opened):hover {
-        background: #ddd;
-        transform: scale(2.03);
-    }
-}
-
-/* ACTIVE для всех */
-.bingo-cell:active {
-    transform: scale(0.97);
-}
-
-/* Адаптивность */
-@media (max-width: 1024px) {
-    .bingo-cell {
-        font-size: 14px;
-        padding: 6px;
-    }
-}
-
-/* Телефоны */
+/* На телефоне при тапе ячейка увеличивается */
 @media (max-width: 768px) {
     .bingo-cell {
-        font-size: 10px; /* еще меньше */
+        font-size: 8px;
         padding: 3px;
+        -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Увеличенная ячейка на телефоне */
+    .bingo-cell.enlarged {
+        transform: scale(1.5); /* Увеличение в 1.5 раза */
+        z-index: 100; /* Поверх других ячеек */
+        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    /* Эффект нажатия */
+    .bingo-cell:active:not(.enlarged) {
+        transform: scale(0.95);
+        transition: transform 0.1s ease;
     }
 }
 
-/* Маленькие телефоны */
+/* Для маленьких телефонов меньше увеличение */
 @media (max-width: 480px) {
     .bingo-cell {
-        font-size: 8px; /* ОЧЕНЬ мелко */
+        font-size: 7px;
         padding: 2px;
+    }
+    
+    .bingo-cell.enlarged {
+        transform: scale(1.4);
     }
 }
 
-/* Очень маленькие телефоны (например, iPhone SE) */
 @media (max-width: 375px) {
     .bingo-cell {
-        font-size: 7px; /* СУПЕР мелко */
+        font-size: 6px;
         padding: 1px;
+    }
+    
+    .bingo-cell.enlarged {
+        transform: scale(1.3);
+    }
+}
+
+/* Для ПК - обычный размер шрифта */
+@media (min-width: 769px) {
+    .bingo-cell {
+        font-size: 16px;
+        padding: 8px;
     }
 }
