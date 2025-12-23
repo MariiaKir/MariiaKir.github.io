@@ -37,7 +37,6 @@ body {
     margin: 20px 0;
 }
 
-
 .bingo-cell {
     aspect-ratio: 1;                     /* квадратные ячейки */
     min-height: 0;                       /* важно для aspect-ratio */
@@ -62,4 +61,10 @@ body {
     /* Чтобы текст уменьшался если не помещается: */
     line-height: 1.2;
     font-size: clamp(10px, 2.5vw, 14px); /* адаптивный размер шрифта */
+}
+
+/* При наведении */
+.bingo-cell:hover {
+    transform: scale(2.00); /* небольшое увеличение */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
