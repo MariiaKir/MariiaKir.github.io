@@ -55,3 +55,14 @@ bingo-cell {
     overflow-wrap: break-word; /* Перенос длинных слов */
     word-break: break-word; /* Перенос слов при необходимости */
 }
+
+.bingo-cell.revealed {
+    background: #4CAF50;
+    color: white;
+    border-color: #388E3C;
+}
+
+.bingo-cell.locked {
+    background: #ff9800;
+    color: white;
+}
