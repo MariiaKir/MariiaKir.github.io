@@ -68,20 +68,24 @@ body {
     font-size: 16px; /* для компьютера */
 }
 
-/* HOVER для ПК (только когда есть hover) */
+/* Открытая ячейка */
+.bingo-cell.opened {
+    background: #eee; /* ЗЕЛЕНЫЙ */
+    color: black; /* БЕЛЫЙ текст */
+    border-color: #ccc;
+}
+
+/* HOVER только для неоткрытых на ПК */
 @media (hover: hover) and (pointer: fine) {
-    .bingo-cell:hover {
-        transform: scale(2.05);
-        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        background: #eee; /* немного темнее */
+    .bingo-cell:not(.opened):hover {
+        background: #ddd;
+        transform: scale(2.03);
     }
 }
 
-/* ACTIVE эффект (для нажатия на ПК и тапов на мобильных) */
+/* ACTIVE для всех */
 .bingo-cell:active {
-    transform: scale(2.00);
-    background: #eee; /* еще темнее */
-    transition: transform 0.1s ease; /* быстрая анимация */
+    transform: scale(1.97);
 }
 
 /* Адаптивность */
@@ -92,18 +96,26 @@ body {
     }
 }
 
+/* Телефоны */
 @media (max-width: 768px) {
     .bingo-cell {
-        font-size: 12px;
-        padding: 5px;
-        gap: 8px;
+        font-size: 10px; /* еще меньше */
+        padding: 3px;
     }
 }
 
+/* Маленькие телефоны */
 @media (max-width: 480px) {
     .bingo-cell {
-        font-size: 8px;
-        padding: 3px;
-        gap: 4px;
+        font-size: 8px; /* ОЧЕНЬ мелко */
+        padding: 2px;
+    }
+}
+
+/* Очень маленькие телефоны (например, iPhone SE) */
+@media (max-width: 375px) {
+    .bingo-cell {
+        font-size: 7px; /* СУПЕР мелко */
+        padding: 1px;
     }
 }
