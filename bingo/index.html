@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Эконометрическое Бинго</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Аудиоплеер -->
+        <div class="audio-player">
+            <button id="muteBtn">🔇 Выключить звук</button>
+            <audio id="backgroundAudio" loop>
+                <source src="audio/go.mp3" type="audio/mpeg">
+            </audio>
+        </div>
+
+        <!-- Бинго-сетка -->
+        <div class="bingo-container">
+            <h2>Бинго</h2>
+            <div class="bingo-grid" id="bingoGrid">
+                <!-- 5x5 или другая сетка -->
+                <!-- Ячейки будут созданы через JS -->
+            </div>
+            <div class="controls">
+                <button id="adminShowBtn" style="display:none;">Показать следующую</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
