@@ -2,7 +2,7 @@
 layout: default
 title: Эконометрика
 nav_order: 1
-permalink: \
+permalink: /
 ---
 # Текст
 Текст текст текст
