@@ -1,4 +1,9 @@
-remote_theme: just-the-docs/just-the-docs
 title: Эконометрика
 description: Заметки для курса эконометрики
-baseurl: "/metrics_book"
+
+remote_theme: just-the-docs/just-the-docs
+nav_sort: page_order
+collapse_inactive_menu: true # Сворачивать неактивные разделы меню
+
+math: mathjax
+#baseurl: "/metrics_book"
