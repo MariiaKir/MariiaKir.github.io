@@ -5,5 +5,8 @@ remote_theme: just-the-docs/just-the-docs
 nav_sort: page_order
 collapse_inactive_menu: true # Сворачивать неактивные разделы меню
 
+plugins:
+  - jekyll-remote-theme
+
 math: mathjax
 #baseurl: "/metrics_book"
