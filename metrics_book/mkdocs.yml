@@ -1,0 +1,21 @@
+site_name: Эконометрика
+
+theme:
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+
+# Поддержка формул (работает из коробки)
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+
+extra_javascript:
+  - https://polyfill.io
+  - https://jsdelivr.net
+
+nav:
+  - Главная: index.md
+  - Разделы курса:
+    - Введение: capter1.md
